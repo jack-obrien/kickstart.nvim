@@ -44,7 +44,7 @@ if vim.g.neovide then
   end
 
   -- set initial scale to 0.8
-  get_scaling_function(0.8)()
+  get_scaling_function(0.7)()
 
   vim.keymap.set({ 'n', 'i' }, '<C-->', get_scaling_function(0.95))
   vim.keymap.set({ 'n', 'i' }, '<C-=>', get_scaling_function(1.05))
@@ -879,7 +879,7 @@ require('lazy').setup({
   require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  require 'kickstart.plugins.neo-tree',
+  -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
