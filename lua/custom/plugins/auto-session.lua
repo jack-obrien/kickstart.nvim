@@ -12,10 +12,11 @@ return {
     ---@module "auto-session"
     ---@type AutoSession.Config
     opts = {
-      --suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
-      log_level = 'debug',
+      suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+      --log_level = 'debug',
       auto_restore_last_session = true,
-      --cwd_change_handling = true,
+      auto_session_enable_last_session = true,
+      cwd_change_handling = true,
     }
   }
   
