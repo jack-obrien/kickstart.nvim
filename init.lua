@@ -148,6 +148,11 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- keymappings for using barbar plugin
+vim.keymap.set('n', '<C-Tab>', '<Cmd>BufferNext<CR>')
+vim.keymap.set('n', '<C-S-Tab>', '<Cmd>BufferPrevious<CR>')
+vim.keymap.set('n', '<C-w>', '<Cmd>BufferClose<CR>')
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -574,7 +579,8 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
-        --
+
+        jedi_language_server = {},
 
         lua_ls = {
           -- cmd = {...},
