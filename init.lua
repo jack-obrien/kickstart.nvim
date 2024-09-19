@@ -29,7 +29,8 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
+vim.o.guifont = 'SauceCodePro Nerd Font'
 
 -- neovide config
 if vim.g.neovide then
@@ -58,9 +59,6 @@ end
 -- Make line numbers default
 vim.opt.number = true
 vim.opt.relativenumber = true
--- You can also add relative line numbers, to help with jumping.
---  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -114,6 +112,9 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 5
+
+-- Color column for line spacing
+vim.opt.colorcolumn = '88'
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`

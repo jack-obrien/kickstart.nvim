@@ -15,7 +15,6 @@ return {
       suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
       --log_level = 'debug',
       auto_restore_last_session = true,
-      auto_session_enable_last_session = true,
       cwd_change_handling = true,
       post_restore_cmds = { -- require open nvim-tree on restore session
         function()
