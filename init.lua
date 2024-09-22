@@ -580,8 +580,31 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
-
-        jedi_language_server = {},
+        pylsp = {
+          cmd = { 'pylsp', '-vvv', '--log-file', '/tmp/lsp.log' },
+          settings = {
+            pylsp = {
+              plugins = {
+                autopep8 = { enabled = false },
+                mccabe = { enabled = false },
+                pycodestyle = {
+                  enabled = true,
+                  maxLineLength = 88,
+                },
+                yapf = { enabled = false },
+                pyflakes = { enabled = true },
+                pydocstyle = { enabled = true },
+                python_lsp_black = { enabled = true },
+                --ruff = {
+                --  enabled = true,
+                --  formatEnabled = true,
+                --  select = { 'F', 'E', 'D' },
+                --  targetVersion = 'py310',
+                --},
+              },
+            },
+          },
+        },
 
         lua_ls = {
           -- cmd = {...},
@@ -664,6 +687,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        python = { 'black' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
