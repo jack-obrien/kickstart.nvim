@@ -594,7 +594,7 @@ require('lazy').setup({
                 yapf = { enabled = false },
                 pyflakes = { enabled = true },
                 pydocstyle = { enabled = true },
-                python_lsp_black = { enabled = true },
+                black = { enabled = true },
                 --ruff = {
                 --  enabled = true,
                 --  formatEnabled = true,
@@ -668,7 +668,7 @@ require('lazy').setup({
       },
     },
     opts = {
-      notify_on_error = false,
+      notify_on_error = true,
       --format_on_save = function(bufnr)
       --  -- Disable "format_on_save lsp_fallback" for languages that don't
       --  -- have a well standardized coding style. You can add additional
@@ -866,9 +866,12 @@ require('lazy').setup({
       statusline.section_location = function()
         return '%2l:%-2v'
       end
-
-      -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_filename = function() end
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_git = function() end
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_diff = function() end
     end,
   },
   { -- Highlight, edit, and navigate code
