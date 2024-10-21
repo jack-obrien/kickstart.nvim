@@ -30,7 +30,7 @@ vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
-vim.o.guifont = 'SauceCodePro Nerd Font'
+vim.o.guifont = 'Terminess Nerd Font'
 
 -- neovide config
 if vim.g.neovide then
@@ -45,7 +45,7 @@ if vim.g.neovide then
   end
 
   -- set initial scale to 0.8
-  get_scaling_function(0.7)()
+  get_scaling_function(0.9)()
 
   vim.keymap.set({ 'n', 'i' }, '<C-->', get_scaling_function(0.95))
   vim.keymap.set({ 'n', 'i' }, '<C-=>', get_scaling_function(1.05))
@@ -608,6 +608,7 @@ require('lazy').setup({
 
         dockerls = {},
         bashls = {},
+        lemminx = {},
 
         lua_ls = {
           -- cmd = {...},
