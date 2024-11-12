@@ -150,13 +150,12 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- keymappings for using barbar plugin
-vim.keymap.set('n', '<C-Tab>', '<Cmd>BufferNext<CR>')
-vim.keymap.set('n', '<C-S-Tab>', '<Cmd>BufferPrevious<CR>')
-vim.keymap.set('n', '<C-w>', '<Cmd>BufferClose<CR>')
+vim.keymap.set({ 'n', 'i' }, '<C-Tab>', '<Cmd>BufferNext<CR>')
+vim.keymap.set({ 'n', 'i' }, '<C-S-Tab>', '<Cmd>BufferPrevious<CR>')
+vim.keymap.set({ 'n', 'i' }, '<C-w>', '<Cmd>BufferClose<CR>')
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
-
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
@@ -755,7 +754,7 @@ require('lazy').setup({
         -- chosen, you will need to read `:help ins-completion`
         --
         -- No, but seriously. Please read `:help ins-completion`, it is really good!
-        mapping = cmp.mapping.preset.insert {
+        mapping = cmp.mapping {
           -- Select the [n]ext item
           ['<C-n>'] = cmp.mapping.select_next_item(),
           -- Select the [p]revious item
@@ -769,6 +768,18 @@ require('lazy').setup({
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
           ['<C-y>'] = cmp.mapping.confirm { select = true },
+
+          -- Reference: https://www.reddit.com/r/neovim/comments/10r7l63/how_to_stop_nvimcmp_from_using_my_arrow_keys/
+          -- When we move down using arrow keys in insert mode, close the current completion.
+          ['<Down>'] = cmp.mapping(function(fallback)
+            cmp.close()
+            fallback()
+          end, { 'i' }),
+
+          ['<Up>'] = cmp.mapping(function(fallback)
+            cmp.close()
+            fallback()
+          end, { 'i' }),
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
@@ -834,6 +845,15 @@ require('lazy').setup({
       vim.cmd.hi 'Comment gui=none'
     end,
   },
+
+  -- {
+  --   'catppuccin/nvim',
+  --   name = 'catppuccin',
+  --   priority = 1000,
+  --   init = function()
+  --     vim.cmd.colorscheme 'catppuccin-mocha'
+  --   end,
+  -- },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
