@@ -1,5 +1,3 @@
-vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
-
 return {
   {
     'rmagatti/auto-session',
@@ -13,13 +11,18 @@ return {
     ---@type AutoSession.Config
     opts = {
       suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
-      --log_level = 'debug',
+      log_level = 'error',
       auto_restore_last_session = true,
       cwd_change_handling = true,
       post_restore_cmds = { -- require open nvim-tree on restore session
         function()
           require('custom.plugins.utils.barbar-tree-offset').toggle()
         end,
+      no_restore_cmds = {
+        function()
+          require('custom.plugins.utils.barbar-tree-offset').toggle()
+        end,
+      },
       },
     },
   },
