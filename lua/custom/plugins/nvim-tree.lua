@@ -1,7 +1,7 @@
 return {
   'nvim-tree/nvim-tree.lua',
   version = '*',
-  -- lazy = false,
+  lazy = true,
   dependencies = {
     'nvim-tree/nvim-web-devicons',
   },
@@ -9,6 +9,6 @@ return {
     sync_root_with_cwd = true,
     renderer = {
       add_trailing = true
-    }
+    },
   },
 }

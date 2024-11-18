@@ -1,3 +1,5 @@
+vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
+
 return {
   {
     'rmagatti/auto-session',
@@ -18,11 +20,11 @@ return {
         function()
           require('custom.plugins.utils.barbar-tree-offset').toggle()
         end,
+      },
       no_restore_cmds = {
         function()
           require('custom.plugins.utils.barbar-tree-offset').toggle()
         end,
-      },
       },
     },
   },
