@@ -1,14 +1,11 @@
 local M = {}
 
--- Define your custom function
-M.toggle = function()
+-- Open the nvim tree without focusing it
+M.open_nvim_tree_no_focus = function()
   local nvim_tree = require 'nvim-tree.api'
   local bufferline_api = require 'bufferline.api'
 
-  if nvim_tree.tree.is_visible() then
-    nvim_tree.tree.toggle()
-    bufferline_api.set_offset(0)
-  else
+  if not nvim_tree.tree.is_visible() then
     nvim_tree.tree.toggle { focus = false }
     bufferline_api.set_offset(31, 'File Explorer')
   end

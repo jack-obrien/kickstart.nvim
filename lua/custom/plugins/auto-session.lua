@@ -18,12 +18,12 @@ return {
       cwd_change_handling = true,
       post_restore_cmds = { -- require open nvim-tree on restore session
         function()
-          require('custom.plugins.utils.barbar-tree-offset').toggle()
+          require('custom.plugins.utils.barbar-tree-offset').open_nvim_tree_no_focus()
         end,
       },
       no_restore_cmds = {
         function()
-          require('custom.plugins.utils.barbar-tree-offset').toggle()
+          require('custom.plugins.utils.barbar-tree-offset').open_nvim_tree_no_focus()
         end,
       },
     },
