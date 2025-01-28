@@ -8,7 +8,12 @@ return {
   opts = {
     sync_root_with_cwd = true,
     renderer = {
-      add_trailing = true
+      add_trailing = true,
+    },
+  },
+  actions = {
+    change_dir = {
+      global = true,
     },
   },
 }
