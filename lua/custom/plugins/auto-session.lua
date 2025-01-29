@@ -14,7 +14,7 @@ return {
     ---@type AutoSession.Config
     opts = {
       suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
-      log_level = 'debug',
+      --log_level = 'debug',
       auto_restore_last_session = true,
       cwd_change_handling = true,
       post_restore_cmds = { -- require open nvim-tree on restore session
@@ -24,14 +24,14 @@ return {
         barbar_tree_offset.open_nvim_tree_no_focus,
       },
       pre_cwd_changed_cmds = {
-        '%bw',
---        function()
---          require('nvim-tree.api').tree.close()
---        end,
+        '%bw!',
+        function()
+          require('nvim-tree.api').tree.close()
+        end,
       },
-    },
-    post_cwd_changed_cmds = {
-      barbar_tree_offset.open_nvim_tree_no_focus,
+      post_cwd_changed_cmds = {
+        barbar_tree_offset.open_nvim_tree_no_focus,
+      },
     },
   },
 }
