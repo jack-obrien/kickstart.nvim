@@ -492,104 +492,57 @@ require('lazy').setup({
       --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-      -- Enable the following language servers
-      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-      --
-      --  Add any additional override configuration in the following tables. Available keys are:
-      --  - cmd (table): Override the default command used to start the server
-      --  - filetypes (table): Override the default list of associated filetypes for the server
-      --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-      --  - settings (table): Override the default settings passed when initializing the server.
-      --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-      local servers = {
-        -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
-        pylsp = {
-          cmd = { 'pylsp', '-vvv', '--log-file', '/tmp/lsp.log' },
-          settings = {
-            pylsp = {
-              plugins = {
-                autopep8 = { enabled = false },
-                mccabe = { enabled = false },
-                pycodestyle = {
-                  enabled = true,
-                  maxLineLength = 88,
-                },
-                yapf = { enabled = false },
-                pyflakes = { enabled = false },
-                pydocstyle = { enabled = true },
-                --black = { enabled = true },
-                --ruff = {
-                --  enabled = true,
-                --  formatEnabled = true,
-                --  select = { 'F', 'E', 'D' },
-                --  targetVersion = 'py310',
-                --},
+      -- NOTE: Enable LSP language servers here!
+
+      vim.lsp.enable 'pylsp'
+      vim.lsp.config('pylsp', {
+        cmd = { 'pylsp', '-vvv', '--log-file', '/tmp/lsp.log' },
+        settings = {
+          pylsp = {
+            plugins = {
+              autopep8 = { enabled = false },
+              mccabe = { enabled = false },
+              pycodestyle = {
+                enabled = true,
+                maxLineLength = 88,
               },
+              yapf = { enabled = false },
+              pyflakes = { enabled = true },
+              pydocstyle = { enabled = true },
+              black = { enabled = true },
+              --ruff = {
+              --  enabled = true,
+              --  formatEnabled = true,
+              --  select = { 'F', 'E', 'D' },
+              --  targetVersion = 'py310',
+              --},
             },
           },
         },
-
-        dockerls = {},
-        bashls = {},
-        lemminx = {},
-
-        lua_ls = {
-          -- cmd = { ... },
-          -- filetypes = { ... },
-          -- capabilities = {},
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
-            },
-          },
-        },
-      }
-
-      -- Ensure the servers and tools above are installed
-      --
-      -- To check the current status of installed tools and/or manually install
-      -- other tools, you can run
-      --    :Mason
-      --
-      -- You can press `g?` for help in this menu.
-      --
-      -- `mason` had to be setup earlier: to configure its options see the
-      -- `dependencies` table for `nvim-lspconfig` above.
-      --
-      -- You can add other tools here that you want Mason to install
-      -- for you, so that they are available from within Neovim.
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
       })
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-      for server, config in pairs(servers) do
-        -- This handles overriding only values explicitly passed
-        -- by the server configuration above. Useful when disabling
-        -- certain features of an LSP (for example, turning off formatting for ts_ls)
-        config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-        vim.lsp.config(server, config)
-        vim.lsp.enable(server)
-      end
+      vim.lsp.enable 'lua-ls'
+      vim.lsp.config('lua-ls', {
+        settings = {
+          Lua = {
+            completion = {
+              callSnippet = 'Replace',
+            },
+          },
+        },
+      })
 
-      -- manually setup haskell language server, fuck mason
-      --require('lspconfig').hls.setup {}
-      --require('lspconfig')['pylsp'].setup(servers.pylsp)
+      -- Bash langauge server
+      vim.lsp.enable 'bashls'
+
+      -- XML language server
+      vim.lsp.enable 'lemminx'
+
+      -- Dockerfil language server
+      vim.lsp.enable 'dockerls'
+
+      -- Haskell language server
+      vim.lsp.enable 'hls'
     end,
   },
 
